@@ -1,23 +1,32 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moneymanager/view/widgets/my_form.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
-class ExpenceController extends GetxController {
+class ExpenceController extends GetxController
+    with GetTickerProviderStateMixin {
   RxList<Map<String, dynamic>> expenses = <Map<String, dynamic>>[].obs;
+  var category = Category.expense.obs;
   final formKey = GlobalKey<FormState>();
   RxInt expenseId = 0.obs;
   RxBool isUpdate = false.obs;
   RxBool isLoading = false.obs;
   final titleController = TextEditingController();
   final expenseController = TextEditingController();
+  late TabController tabController;
 
   @override
   void onInit() {
     super.onInit();
+    tabController = TabController(length: 2, vsync: this);
     refreshAllData();
+  }
+
+  @override
+  void onClose() {
+    tabController.dispose();
+    super.onClose();
   }
 
   void refreshAllData() async {

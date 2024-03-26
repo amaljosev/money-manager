@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moneymanager/controller/expense/expense_controller.dart';
 import 'package:moneymanager/view/screens/home_screen.dart';
 
 void main() {
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         'home': (context) => const ScreenHome(),
       },
       initialRoute: 'home',
+      
     );
   }
 }
