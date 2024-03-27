@@ -40,7 +40,7 @@ class ScreenHome extends StatelessWidget {
                             },
                             icon: const Icon(Icons.delete_outline_outlined)),
                         onTap: () => expenseCtrl.showForm(
-                            expenseCtrl.expenses[index]['id'], context),
+                            expenseCtrl.expenses[index]['id'], context,true),
                       );
                     },
                     itemCount: expenseCtrl.expenses.length),
@@ -61,7 +61,7 @@ class ScreenHome extends StatelessWidget {
                             },
                             icon: const Icon(Icons.delete_outline_outlined)),
                         onTap: () => expenseCtrl.showForm(
-                            incomeCtrl.incomeCollection[index]['id'], context),
+                            incomeCtrl.incomeCollection[index]['id'],context, false),
                       );
                     },
                     itemCount: incomeCtrl.incomeCollection.length),
@@ -69,7 +69,7 @@ class ScreenHome extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => expenseCtrl.showForm(null, context), 
+            onPressed: () => expenseCtrl.showForm(null, context,null), 
             label: const Text('Add'),
             icon: const Icon(Icons.add),
           ),

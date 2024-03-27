@@ -53,15 +53,19 @@ class MyForm extends StatelessWidget {
                         Radio<Category>(
                           value: Category.expense,
                           groupValue: expenseController.category.value,
-                          onChanged: (Category? value) =>
-                              expenseController.category.value = value!,
+                          onChanged: isUpdate.value
+                              ? (Category? value) {}
+                              : (Category? value) =>
+                                  expenseController.category.value = value!,
                         ),
                         const Text('Expense'),
                         Radio<Category>(
                           value: Category.income,
                           groupValue: expenseController.category.value,
-                          onChanged: (Category? value) =>
-                              expenseController.category.value = value!,
+                          onChanged: isUpdate.value
+                              ? (Category? value) {}
+                              : (Category? value) =>
+                                  expenseController.category.value = value!,
                         ),
                         const Text('Income'),
                       ],
@@ -132,7 +136,7 @@ class MyForm extends StatelessWidget {
                                           expenseController.isLoading.value =
                                               false;
                                           Get.back();
-                                          expenseController.refreshAllData();
+                                          incomeController.refreshIcomeTable();
                                         }
                                       },
                             child: Text(isUpdate.value ? 'Update' : 'Add')),

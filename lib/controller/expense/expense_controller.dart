@@ -25,14 +25,16 @@ class ExpenceController extends GetxController
 
   @override
   void onClose() {
-    tabController.dispose();
     super.onClose();
+    tabController.dispose();
   }
 
   void refreshAllData() async {
     final controller = ExpenceController();
     final data = await controller.getItems();
     expenses.value = data;
+    titleController.text = '';
+    expenseController.text = '';
   }
 
   Future<void> createTable(sql.Database database) async {
@@ -95,13 +97,26 @@ class ExpenceController extends GetxController
     }
   }
 
-  void showForm(int? id, BuildContext context) {
-    if (id != null) {
+  void showForm(int? id, BuildContext context, bool? isExpense) {
+    isUpdate.value = false;
+    if (id != null && isExpense == true) {
       final expense = expenses.firstWhere((element) => element['id'] == id);
       titleController.text = expense['title'];
       expenseController.text = expense['expense'].toString();
       expenseId.value = expense['id'];
       isUpdate.value = true;
+      category.value = Category.expense;
+    } else if (id != null && isExpense == false) {
+      final income = incomeController.incomeCollection
+          .firstWhere((element) => element['id'] == id);
+      titleController.text = income['source'];
+      expenseController.text = income['amount'].toString();
+      expenseId.value = income['id'];
+      category.value = Category.income;
+      isUpdate.value = true;
+    } else {
+      titleController.text = '';
+      expenseController.text = '';
     }
     showModalBottomSheet(
       context: context,

@@ -12,6 +12,7 @@ class IncomeController extends GetxController {
     super.onInit();
     refreshIcomeTable();
   }
+  
 
   refreshIcomeTable() async {
     final ctrl = IncomeController();
@@ -44,7 +45,7 @@ class IncomeController extends GetxController {
     final ctrl = IncomeController();
     final db = await ctrl.db();
     int response = await db.insert(
-        'income_db', {'income': income.amount, 'source': income.source},
+        'income_db', {'amount': income.amount, 'source': income.source},
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return response;
   }
@@ -69,7 +70,7 @@ class IncomeController extends GetxController {
         {
           'amount': income.amount,
           'source': income.source,
-          'date': DateTime.now()
+          'date': DateTime.now().toString()
         },
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return response;
